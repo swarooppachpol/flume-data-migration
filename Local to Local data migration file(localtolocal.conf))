@@ -1,0 +1,41 @@
+# Define a memory channel called ch1 on agent1
+
+agent1.channels.ch1.type = memory
+
+
+
+agent1.sources.spool.type = spooldir
+
+agent1.sources.spool.channels = ch1
+
+agent1.sources.spool.spoolDir = /home/hadoopuser/flume/source_sink_dir
+
+agent1.sources.spool.fileHeader = true
+
+
+
+agent1.sinks.fr1.type = file_roll
+
+agent1.sinks.fr1.channel = ch1
+
+agent1.sinks.fr1.sink.directory = /home/hadoopuser/flume/destination_sink_dir
+
+
+
+agent1.channels = ch1
+
+agent1.sources = spool
+
+agent1.sinks = fr1
+
+
+
+
+
+
+######################################################
+Run this file:
+
+cd flume
+
+bin/flume-ng agent --conf ./conf/ -f conf/Localtolocal.conf Dflume.root.logger=DEBUG,console -n agent1
